@@ -1,0 +1,9 @@
+.active-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background-color: rgb(79 70 229 / var(--tw-text-opacity));
+  }
