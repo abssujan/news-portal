@@ -73,7 +73,7 @@ const loadCatagoryData = () => {
       <img class="object-cover rounded-md h-[400px] w-full" src="${newsInformation.image_url}" alt="">
    </div>
    <!-- information -->
-   <div class="w-[60%] p-5">
+   <div data-modal-target="default-modal" data-modal-toggle="default-modal" onclick="loadModalPop('${newsInformation._id}')" class="w-[60%] p-5 cursor-pointer">
       <!-- tittle -->
       <h1 class="text-2xl font-semibold text-gray-800">${newsInformation.title}</h1>
       <!-- news body -->
@@ -138,5 +138,37 @@ const loadCatagoryData = () => {
          loader.classList.add('hidden')
       }
    }
+   const loadModalPop = (news_id) => {
+      const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+      fetch(url)
+      .then(res => res.json())
+      .then(data => displayModalPopData(data.data[0]))
+      const modal = document.getElementById('default-modal');
+      if(modal.classList.contains('hidden')){
+         modal.classList.remove('hidden');
+      }
+   }
+   const displayModalPopData = newsDetails => {
+      console.log(newsDetails)
+      const modalHeader = document.getElementById('modal-header');
+       modalHeader.innerText = `${newsDetails.title}`
+      const newsBody = document.getElementById('news-body');
+      newsBody.innerText = `${newsDetails.details}`
+      const modalFooter = document.getElementById('modal-footer');
+      modalFooter.innerHTML = `
+      <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-cover" src="${newsDetails.author.img}" alt="Bordered avatar">
+      <p>${newsDetails.author.name ? newsDetails.author.name : 'Desk Report'}</p>
+      `
+   }
+   const closeButton = () => {
+      const closeButton = document.getElementById('close-button');
+      const modal = document.getElementById('default-modal');
+      if(closeButton.classList.contains('text-gray-400')){
+         modal.classList.add('hidden')
+      }
+   }
+   const showModalData = () => {
+
+   }
    loadCatagoryData()
-   loadNewsData('01')
+   loadNewsData()
