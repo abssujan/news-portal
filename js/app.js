@@ -13,17 +13,18 @@ const loadCatagoryData = () => {
             .then(data => displayCatagoryData(data.data.news_category))
             .catch(error => {
                 console.error('Error fetching data:', error);
-                // Handle the error as needed
+                
             });
     } catch (error) {
         console.error('Error in fetch operation:', error);
-        // Handle the error as needed
+        
     }
 };
 
 const displayCatagoryData = catagory => {
     //console.log(catagory)
     const navBar = document.getElementById('navbar-default');
+    const catagoryChange = document.getElementById('category-change');
     catagory.forEach(navData =>{
         //console.log(navData)
         const navUl = document.createElement('li');
@@ -31,6 +32,11 @@ const displayCatagoryData = catagory => {
         ancorTag.href = '#';
         ancorTag.onclick = () => {
             loadNewsData(navData.category_id);
+            if(navData.length !==0){
+               catagoryChange.innerText =`${navData.category_name}`;
+            }else {
+               catagoryChange.innerText =`${navData.category_name}`;
+            }
         };
         ancorTag.classList.add('block', 'py-2', 'px-3', 'text-gray-700', 'bg-blue-700', 'rounded', 'md:bg-transparent', 'md:text-gray-600', 'md:p-0', 'dark:text-white', 'md:dark:text-gray-700', 'hover:text-indigo-600', 'font-semibold');
         ancorTag.innerText = `${navData.category_name}`
@@ -40,22 +46,30 @@ const displayCatagoryData = catagory => {
 }
 const loadNewsData = (category_id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-    console.log(url)
+    //console.log(url)
     fetch(url)
     .then(res => res.json())
     .then(data => displayNewsData(data.data))
 }
 const displayNewsData = newsData => {
-    console.log(newsData)
+    //console.log(newsData)
     const newsCard = document.getElementById('news-card');
+    const newsCounter = document.getElementById('news-counter');
+    
+    if(newsData.length !== 0){
+      newsCounter.innerText = `${newsData.length}`;
+      //catagoryChange.innerText = `${}`
+    }else {
+      newsCounter.innerText = `No  Post `
+    }
     newsCard.innerHTML = '';
     newsData.forEach(newsInformation => {
-        console.log(newsInformation)
+        //console.log(newsInformation)
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('flex', 'justify-between', 'space-x-8', 'mt-10', 'bg-white', 'rounded-lg');
         newsDiv.innerHTML = `
         <!-- image -->
-<div class="image rounded-md h-[400px] w-[40%]">
+<div class="image rounded-md  w-[40%] p-4">
    <img class="object-cover rounded-md h-[400px] w-full" src="${newsInformation.image_url}" alt="">
 </div>
 <!-- information -->
