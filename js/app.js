@@ -167,8 +167,5 @@ const loadCatagoryData = () => {
          modal.classList.add('hidden')
       }
    }
-   const showModalData = () => {
-
-   }
    loadCatagoryData()
-   loadNewsData()
+   loadNewsData('05')
