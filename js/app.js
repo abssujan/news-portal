@@ -257,69 +257,23 @@ const loadCatagoryData = () => {
 
    const displayTrendigNewsData = (trendingData) => {
       const trending = document.getElementById('trending');
+      const trendigGrid = document.getElementById('trendig-grid');
       trendingData.forEach(trendingDataShow => {
          console.log(trendingDataShow)
          if(trendingDataShow.others_info.is_trending === true){
-            trending.innerHTML =`
-            <div class="flex justify-between space-x-8 mt-10 bg-white rounded-lg">
-            <!-- image -->
-   <div class="image rounded-md  w-[40%] p-4">
-      <img class="object-cover rounded-md h-[400px] w-full" src="${trendingDataShow.image_url}" alt="">
-   </div>
-   <!-- information -->
-   <div data-modal-target="default-modal" data-modal-toggle="default-modal" onclick="loadModalPop('${trendingDataShow._id}')" class="w-[60%] p-5 cursor-pointer">
-      <!-- tittle -->
-      <h1 class="text-2xl font-semibold text-gray-800">${trendingDataShow.title}</h1>
-      <!-- news body -->
-      <p class="text-base mt-2 text-gray-600"> ${(trendingDataShow.details).slice(0, 400)}
-      </p>
-      <!-- icon and athor box -->
-      <div class="w-full flex items-center justify-between mt-10">
-         <!-- athor box -->
-         <div class="flex items-center space-x-4">
-            <!-- athor image -->
-            <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-cover" src="${trendingDataShow.author.img}" alt="Bordered avatar">
-            <div class="flex flex-col space-y-1 justify-center" >
-               <p>${trendingDataShow.author.name ? trendingDataShow.author.name : 'Desk Report'}</p>
-               <p>${(trendingDataShow.author.published_date) ? (trendingDataShow.author.published_date): 'no date found'}</p>
+            console.log('true')
+            const createDiv = document.createElement('div');
+            createDiv.classList.add('w-full', 'bg-gray-900', 'rounded-lg', 'sahdow-lg', 'p-12', 'flex', 'flex-col', 'justify-center', 'items-center')
+            createDiv.innerHTML = `
+            <div class="mb-8 w-full">
+            <img class="object-center object-cover rounded-md h-36 w-full" src="${trendingDataShow.image_url}" alt="photo"> 
             </div>
-         </div>
-         <!-- view counter -->
-         <div class="flex items-center space-x-2">
-            <!-- icon -->
-            <div>
-               <i class="fa-regular fa-eye"></i>
-            </div>
-            <div>
-               <p class="font-bold text-lg text-gray-700">${trendingDataShow.total_view ? trendingDataShow.total_view : '100'}m</p>
-            </div>
-         </div>
-         <!-- Ratings -->
-         <div class="flex items-center">
-            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-            </svg>
-            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-            </svg>
-            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-            </svg>
-            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-            </svg>
-            <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-            </svg>
-         </div>
-         <!-- arrow icon -->
-         <div>
-            <button><i class="fa-solid fa-arrow-right text-indigo-600"></i></button>
-         </div>
-      </div>
-   </div>
+            <div class="text-center"> 
+            <p class="text-lg text-white font-semibold mb-2">${trendingDataShow.title}</p> 
+            <p class="text-sm text-white font-semibold mb-2">${(trendingDataShow.details).slice(0,200)} </p>
             </div>
             `;
+            trendigGrid.appendChild(createDiv)
          }
       })
       trending.classList.toggle('hidden');
